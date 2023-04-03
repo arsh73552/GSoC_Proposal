@@ -81,7 +81,7 @@ During this period, I will engage with the community to get familiar with the pr
 
 ## Development Experience
 
-I am Arshdeep Singh, and I can be reached at +919815138659 / arsh.official2002@gmail.com / <a href = "https://www.linkedin.com/in/arshdeep-singh-3b7202229/">Linkedin</a>. I am currently a Third Year student pursuing a BE in Computer Science.
+I am Arshdeep Singh, and I can be reached at +919815138659 / arsh.official2002@gmail.com / <a href = "https://www.linkedin.com/in/arshdeep-singh-3b7202229/">Linkedin</a> / <a href = "https://github.com/arsh73552">Github</a>. I am currently a Third Year student pursuing a BE in Computer Science.
 
 I have achieved several notable accomplishments in my field, which illustrate my development experience including winning Best Domain Project in MLH Hackhound Hackathon held at SRM University and being a finalist in Techgig Code Gladiator Codeathon 2022 among over 400,000 total participants. I have also acquired some certifications such as Data Analytics Specialization offered by Google and Neural Networks and Deep Learning offered by DeepLearning.ai.
 
