@@ -1,6 +1,18 @@
-# Bivariate Colormaps
+---
+title: "Bivariate Colormaps"
+output: 
+  rmdformats::readthedown:
+    fig.align: 'center'
+  html_notebook:
+    toc: true
+  
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
-## Abstract
+
+## Abstract <a href = "https://github.com/arsh73552/GSoC_Proposal">(Proposal On Github)</a>
 
 Matplotlib is a powerful visualization library widely used in the scientific community. I propose to develop a new feature for Matplotlib that allows users to create and use bivariate colormaps. Currently, Matplotlib provides a wide range of univariate colormaps to represent different types of data. However, there is no built-in support for bivariate colormaps, which are crucial for displaying complex data sets that require the representation of two variables simultaneously. To address this limitation, I propose to combine two univariate colormaps in various ways, such as averaging, blending, or creating a custom mapping function. This feature will enable Matplotlib users to create effective and visually appealing plots for complex data sets. I believe that the addition of bivariate colormaps to Matplotlib will be a significant step forward for data visualization and will benefit a broad range of scientific disciplines.
 

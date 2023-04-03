@@ -1283,6 +1283,23 @@ on each code commit and pull request.<br></li>
 </ol>
 </ul>
 </div>
+<div id="collisions" class="section level3">
+<h3><strong>Collisions</strong></h3>
+<p>Collisions occur in colormaps when two different data values map to
+the same color. One way to address this issue is through alpha blending.
+In alpha blending, instead of assigning a single color to each data
+value, a combination of colors is used. This is achieved by blending the
+colors of adjacent data points using an alpha channel. The alpha channel
+controls the degree to which each color contributes to the final blended
+color. By blending colors, it becomes less likely that different data
+values will map to the same color, thus reducing the likelihood of
+collisions.</p>
+<p><span class="math display">\[ result = { (1 - α) * color_{1} + α *
+color_{2}} \]</span></p>
+<p>Here, color1 and color2 are used to represent the inputs to the
+bivaraite colormap. α parameter on the other hand is used to calculate
+the weightage of each of the two variables.</p>
+</div>
 <div id="testing" class="section level3">
 <h3><strong>Testing</strong>:</h3>
 <p>Unit tests will be written to test the algorithm for generating
