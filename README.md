@@ -76,6 +76,7 @@ During this period, I will engage with the community to get familiar with the pr
     2. Fixing issues that I could feasibly tackle. <br>
     3. Creating new PRs for issues that I work on.
 </ul>
+
 ## Development Experience
 
 I am Arshdeep Singh, and I can be reached at +919815138659 / arsh.official2002@gmail.com / <a href = "https://www.linkedin.com/in/arshdeep-singh-3b7202229/">Linkedin</a>. I am currently a Third Year student pursuing a BE in Computer Science.
