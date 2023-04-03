@@ -12,6 +12,8 @@ The objective of this project is to develop a new feature for Matplotlib that al
 
 The proposed approach for generating bivariate colormaps involves combining two univariate colormaps. One approach is to simply average the RGBA values from each univariate colormap to generate a new color for each pixel. Another approach is to use weighted average or more complex algorithms like using a radial basis function to map pairs of values to a single color. Furthermore, allowing the user to write their own custom function should also be possible to allow customization for a specific use-case. The resulting bivariate colormap can then be used to visualize data with two variables.
 
+**Note:** The project approach could be altered based on mentor feedback if required.
+
 ### **Steps**:
 
 <ul> 
