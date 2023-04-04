@@ -28,23 +28,65 @@ The proposed approach for generating bivariate colormaps involves combining two 
 
 ### **Steps**:
 
-<ul> 
-1. Develop the algorithm for generating bivariate colormaps using Matplotlib functions such as ListedColormap, colormap, and rgba_colors.<br>
-2. Write unit tests to ensure the algorithm produces accurate and expected results.<br>
-3. Implement the new bivariate colormap feature in Matplotlib and integrate it into the library's codebase.<br>
-4. Write additional tests to ensure the new feature integrates seamlessly with the rest of Matplotlib's functionality.<br>
-5. Use a continuous integration system, to run the tests automatically on each code commit and pull request.<br>
-</ul>
+#### **1. Normalization**
+<br>
+Normalize input variables: Normalize each input variable in the range [0, 1]. This can be done using the normalization which works best with the dataset and the specific use-case. For example: min-max normalization, Z-score normalization. So, if we have 2 variables (N - variables can be chosen as this approach generalizes) v1, v2. We can obtain 2 new variables namely, norm_v1 and norm_v2. 
 
+The reason the variables are both individually normalized and then furthermore passed into a composite norm function is so that one variable doesn't dominate the colormap. for instance, if one variable has a range from 0 to 1 and another has a range from 0 to 100 the latter would dominate the color map if their norms are multiplied together. Therefore we first normalize the variables individually and then combine the normalized values using a composite norm function that takes into account the relative importance of each variable.
+
+```
+norm_v1 = normfunction1(v1)
+norm_v2 = normfunction2(v2)
+```
+
+#### **2. Apply individual color maps**
+<br>
+Apply a separate color map to each normalized input variable to obtain two separate color maps (Using separate color maps helps reducing collisions in the map and has been discussed further later in the proposal). This can be achieved using functions like cm.get_cmap from matplotlibs code base.
+
+```
+    cmap1 = matplotlib.cm.get_cmap(map_name_1)
+    cmap2 = matplotlib.cm.get_cmap(map_name_2)
+    color1 = cmap1(nosrm_v1)
+    color2 = cmap2(norm_v2)
+```
+
+#### **3. Combine color maps using composite norm**
+<br>
+
+This step involves creating a composite norm that can handle the normalization of all N variables, which can then be used to map the data onto a color space.
+To create the composite norm, we need to take into account the different normalization schemes that may be applied to each variable. We can achieve this by defining a normalization function for each variable, e.g., normfunction1(), normfunction2(), ..., normfunctionN(), and then combining them into a single composite norm.
+
+One approach to combining the normalization functions is to use the product of the individual norms. For example, if we have two variables v1 and v2 with normalization functions normfunction1() and normfunction2(), respectively, the composite norm would be defined as:
+
+```
+composite_norm(v1, v2) = normfunction1(v1) * normfunction2(v2)
+```
+
+This means that the composite norm takes into account both variables and applies the appropriate normalization for each.
+
+For N variables, we would extend this idea to:
+
+```
+composite_norm(v1, v2, ..., vn) = normfunction1(v1) * normfunction2(v2) * ... * normfunctionN(vn)
+```
+#### **4. Apply alpha blending**
+
+<br>
+Alpha blending is a technique used to combine colors with transparency. It involves specifying an alpha value (between 0 and 1) for each color, which represents its opacity. Colors with a higher alpha value are more opaque and less transparent, while colors with a lower alpha value are more transparent.
+
+To blend two colors together using alpha blending, the colors are multiplied by their respective alpha values, added together, and then divided by the sum of the alpha values. This produces a new color that represents the combination of the two original colors with their respective opacities taken into account.
+
+For n variables, we would first calculate the blended color for the first two variables using alpha blending, as described above. Then, we would calculate the blended color for the next variable and blend it with the previously calculated color using alpha blending. We would continue this process until we have blended all n colors together. The resulting color would represent the combination of all n colors with their respective opacities taken into account.
 
 ### **Collisions**
 
-Collisions occur in colormaps when two different data values map to the same color. One way to address this issue is through alpha blending. In alpha blending, instead of assigning a single color to each data value, a combination of colors is used. This is achieved by blending the colors of adjacent data points using an alpha channel. The alpha channel controls the degree to which each color contributes to the final blended color. By blending colors, it becomes less likely that different data values will map to the same color, thus reducing the likelihood of collisions.
+Collisions occurr when 2 or more variable pairs are mapped to the same color. Collisions are minimized in this approach because of the following factors:
 
-$$ result = { (1 - α) * color_{1} + α * color_{2}} $$
+Normalization ensures that each variable is scaled to the same range, allowing for a more even distribution of data across the available color space. This can help reduce the likelihood of collisions occurring.
 
-Here, color1 and color2 are used to represent the inputs to the bivaraite colormap.
-α parameter on the other hand is used to calculate the weightage of each of the two variables.
+In addition, the use of alpha blending can help differentiate between data points that map to the same color value. By blending the colors of overlapping points, the resulting color will be a combination of the original colors, making it easier to distinguish between them.
+
+However, if the number of overlapping points is too high, it may still be difficult to differentiate between them. In such cases, additional techniques such as interactive brushing and linking can be used to highlight individual data points or groups of data points.
 
 ### **Testing**:
 
@@ -79,16 +121,17 @@ During this period, I will engage with the community to get familiar with the pr
 
 <ul>
     1. Improving and expanding the bivariate colormap function to include different algorithms for combining the two univariate colormaps.<br>
-    2. Adding support for different color spaces and data types.<br>
-    3. Improving the performance and efficiency of the function.<br>
-    4. Writing more unit tests and documentation.<br>
-    5. Participating in code reviews and making necessary changes.<br>
-    6. Submitting a progress report at the end of this phase.<br>
+    2. Implementing support for N-Variate colormaps. 
+    3. Adding support for different color spaces and data types.<br>
+    4. Improving the performance and efficiency of the function.<br>
+    5. Writing more unit tests and documentation.<br>
+    6. Participating in code reviews and making necessary changes.<br>
+    7. Submitting a progress report at the end of this phase.<br>
 </ul>
 
 ### **Final Week August 21st -> August 28th**
 <ul>
-    1. Finalizing the implementation of the bivariate colormap function in Matplotlib.<br>
+    1. Finalizing the implementation of the bivariate/N-variate colormap function in Matplotlib.<br>
     2. Ensuring that the function works with different types of plots and use cases.<br>
     3. Updating the documentation and providing examples of usage.<br>
     4. Conducting further testing and fixing any bugs or issues that arise.<br>
